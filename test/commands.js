@@ -2,6 +2,7 @@
 
 var should = require('should'),
     sinon = require('sinon'),
+    reflekt = require('reflekt'),
     proxyquire = require('proxyquire');
 
 describe('commands', function() {
@@ -13,13 +14,14 @@ describe('commands', function() {
                 callback();
             });
 
-            this.start = sinon.spy(function(port, callback) {
+            this.start = sinon.spy(function(port, host, callback) {
                 callback();
             });
 
             this.kj = {
                 app: sinon.spy(function() {
                     return {
+                        caller: reflekt.caller(),
                         initialize: self.initialize,
                         start: self.start
                     };
