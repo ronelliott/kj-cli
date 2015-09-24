@@ -8,6 +8,7 @@ function run(config, callback) {
         host = config.host || '127.0.0.1',
         port = config.port || 3000;
 
+    app.caller.resolver.add('$$config', config);
     app.initialize(config.modules || [], function(err) {
         if (err) {
             callback(err);
