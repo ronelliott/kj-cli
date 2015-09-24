@@ -4,7 +4,9 @@ var prequire = require('parent-require'),
     kj = prequire('kj');
 
 function run(config, callback) {
-    var app = kj.app();
+    var app = kj.app(),
+        host = config.host || '127.0.0.1',
+        port = config.port || 3000;
 
     app.initialize(config.modules || [], function(err) {
         if (err) {
@@ -12,7 +14,7 @@ function run(config, callback) {
             return;
         }
 
-        app.start(config.port || 3000, callback);
+        app.start(port, host, callback);
     });
 }
 
