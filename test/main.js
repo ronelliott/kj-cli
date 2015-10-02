@@ -5,7 +5,7 @@ var should = require('should'),
     path = require('path'),
     proxyquire = require('proxyquire');
 
-describe('bin', function() {
+describe('main', function() {
     beforeEach(function() {
         this.originalArgv = process.argv;
         this.originalCwd = process.cwd;
@@ -22,12 +22,12 @@ describe('bin', function() {
     });
 
     it('should default to the `run` command if one is not given', function() {
-        proxyquire('../bin', { './commands': this.commands });
+        proxyquire('../main', { './commands': this.commands })();
         this.commands.run.called.should.equal(true);
     });
 
     it('should load the commands from the cwd', function() {
-        proxyquire('../bin', { './commands': this.commands });
+        proxyquire('../main', { './commands': this.commands })();
         process.cwd.called.should.equal(true);
     });
 
@@ -38,7 +38,7 @@ describe('bin', function() {
             config.should.eql({ foo: 'foo' });
         };
         process.argv = [ null, null, '--config=' + path.resolve(__dirname, 'cfg.js') ];
-        proxyquire('../bin', { './commands': this.commands });
+        proxyquire('../main', { './commands': this.commands })();
         called.should.equal(true);
     });
 
@@ -55,7 +55,7 @@ describe('bin', function() {
                     called = true;
                     resolver.items.should.have.property(name);
                 };
-                proxyquire('../bin', { './commands': this.commands });
+                proxyquire('../main', { './commands': this.commands })();
                 called.should.equal(true);
             });
         });
