@@ -1,12 +1,11 @@
 'use strict';
 
-var minimist = require('minimist'),
-    argv = minimist(process.argv.slice(2)),
-    extend = require('extend'),
-    fs = require('fs'),
-    path = require('path'),
-    reflekt = require('reflekt'),
-    requireDirectory = require('require-directory');
+const minimist = require('minimist'),
+      argv = minimist(process.argv.slice(2)),
+      fs = require('fs'),
+      path = require('path'),
+      reflekt = require('reflekt'),
+      requireDirectory = require('require-directory');
 
 module.exports = function(commands) {
     var command,
@@ -17,7 +16,7 @@ module.exports = function(commands) {
     commands = commands || require('./commands');
 
     if (fs.existsSync(loadCommandsPath)) {
-        extend(true, commands, requireDirectory({
+        Object.assign(commands, requireDirectory({
             require: require
         }, loadCommandsPath));
     }

@@ -1,7 +1,7 @@
 'use strict';
 
-var prequire = require('parent-require'),
-    kj = prequire('kj');
+const prequire = require('parent-require'),
+      kj = prequire('kj');
 
 function run(config, callback) {
     var app = kj.app(),
