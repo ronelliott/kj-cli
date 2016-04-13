@@ -1,6 +1,6 @@
 {
   "name": "kj-cli",
-  "version": "0.0.3",
+  "version": "1.0.0",
   "description": "Command line interface for the kj webapp framework.",
   "author": "Ron Elliott <ronaldbelliott@gmail.com>",
   "license": "ISC",
